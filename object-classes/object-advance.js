@@ -7,10 +7,10 @@
 */
 
 // Object.assign() does a shallow copy
-var arr = [1,2,3];
+var arr = [1,2,3,4];
 
-var doSomething = function () {
-  //...
+var doSomething = function (arg) {
+  return arg + 32
 }
 
 var obj1 = {
@@ -21,13 +21,13 @@ var obj1 = {
 
 var obj2 = Object.assign({}, obj1)
 
-console.log(obj2.a === 22) // ?
-console.log(obj2.b === arr) // ?
-console.log(obj2.c === doSomething) // ?
-console.log(obj1.b) // ?
-console.log(obj1.c) // ?
-console.log(obj2.b) // ?
-console.log(obj2.c) // ?
+console.log(obj2.a === 22) // true
+console.log(obj2.b === arr) // true
+console.log(obj2.c === doSomething) // true
+console.log(obj1.b) // [1, 2, 3, 4]
+console.log(obj1.c) // f() {}
+console.log(obj1.c(6)) // 32 + 6
+console.log(obj1.c(8)) // 32 + 8
 
 
 // Writable, enumerable and configurable
@@ -43,7 +43,9 @@ you can never change any of the writable, enumerable or configurable settings ag
 */
 
 var obj = {
-    a: 2
+    a: 2,
+    secret: 'mysecret', // writable = false
+    nonLoop: 'nono' // enumerable = false
 }
 
 Object.getOwnPropertyDescriptor( obj, "a") // Object 
@@ -57,6 +59,8 @@ Object.preventExtensions()
 Object.seal()
 Object.freeze()
 
+
+
 /*
 Object.preventExtensions() means no new properties can be added to your object
 Object.seal() calls Object.preventExtensions(), but also sets configurable to false on every property in the object. This prevents you from adding new properties as well as reconfiguring or deleting them. You can however still modify their values.
@@ -64,14 +68,14 @@ Object.freeze() calls Object.seal(), but also sets writable to false on every pr
 */
 
 // ======================
-// GET and PUT 
+// GET and SET 
 obj.a // GET
 // When you call obj.a to access the property a, what is actually being performed is a get() operation on the object
 // GEt will search for a property with the requested name (a in our case)
 // if doesn't work keep looking for it in the prototype chain (all the object lined to the current obj)
 // If cannot find it, it return undefined
 
-obj.b = 7 // PUT
+obj.b = 7 // SET
 // When you add a property to an object obj.b = 7 a put() operation is performed
 // If the property is already present on the current object, it will check if writible is set to true. 
 // If writible = true then it update the property, if is set to false, it will fail/throw error (non-stric/stric mode)
