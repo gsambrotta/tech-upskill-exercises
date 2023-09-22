@@ -12,7 +12,8 @@ typeof null;
 
 typeof undefined;  // undefined 
 
-typeof {}; // object 
+typeof {}; // object
+
 
 // 9 Subtypes (complex primitives)
 // These are all built-in JavaScript functions which can be used as a constructor, i.e. with the new keyword.
@@ -44,6 +45,28 @@ typeof objStr // "object"
 objStr instanceof String // true
 objStr instanceof Object // true
 
+// Example
+var s = new String("hello")
+var p = new String("hello")
+s === 'hello' // false
+s == 'hello' // true
+s === p // false
+
+obj1 = {
+    a: {
+        b: [1, 2, 3]
+    }
+}
+obj2 = {
+    a: {
+        b: [4, 5, 6]
+    }
+}
+
+if(obj1 === obj2) {
+    ////.....
+}
+
 
 // Number
 var num = 123 //number primitive
@@ -69,7 +92,7 @@ objBoo instanceof Object // true
 
 // These are all of the same type, regardless of whether the primitive or constructed form is used.
 // Object
-var obj = {}//object primitive
+var obj = {} //object primitive
 typeof obj // "object"
 obj instanceof Object // true 
 

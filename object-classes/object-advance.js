@@ -16,7 +16,8 @@ var doSomething = function (arg) {
 var obj1 = {
   a: 22,
   b: arr, // this is a reference to arr, not a copy
-  c: doSomething // this is a reference to doSomething, not a copy
+  c: doSomething, // this is a reference to doSomething, not a copy
+  g: "orange"
 }
 
 var obj2 = Object.assign({}, obj1)
@@ -60,7 +61,6 @@ Object.seal()
 Object.freeze()
 
 
-
 /*
 Object.preventExtensions() means no new properties can be added to your object
 Object.seal() calls Object.preventExtensions(), but also sets configurable to false on every property in the object. This prevents you from adding new properties as well as reconfiguring or deleting them. You can however still modify their values.
@@ -102,20 +102,20 @@ obj.b = 7 // SET
 */
 
 // ======================
-// in vs hasOwnPropertyOf()
+// in vs hasOwnProperty()
 in // Check if a property is on the current object or up the prototype chain
-hasOwnPropertyOf // Check only the current object
+hasOwnProperty // Check only the current object
 
 var obj1 = {
   a: 22
 }
 var obj2 = Object.create(obj1); // obj2 is now linked to obj1
 
-console.log("a" in obj1) // ?
-obj1.hasOwnProperty("a") // ?
+console.log("a" in obj1) // true
+obj1.hasOwnProperty("a") // true
 
-console.log("a" in obj2) // ?
-obj2.hasOwnProperty("a") // ?
+console.log("a" in obj2) // true
+obj2.hasOwnProperty("a") // false
 
 // ======================
 // For of Loop
