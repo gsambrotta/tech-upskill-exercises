@@ -1,7 +1,7 @@
 // Contructor
 /* 
 Using object literals is fine when you only need to create one object, but if you have to create more than one,
-as in the previous section, they're seriously inadequate. 
+they're seriously inadequate. 
 We have to write out the same code for every object we create, and if we want to change some properties 
 of the object - like adding a height property - then we have to remember to update every object.
 
@@ -33,8 +33,8 @@ frankie.introduceSelf(); // "Hi! I'm Frankie."
 */
 
 function OrdinaryFunction() {
-    console.log("I'm just an average function");
-  }
+  console.log("I'm just an average function");
+}
   
 var x = new OrdinaryFunction();
 // "I'm just an average function"
@@ -44,19 +44,19 @@ x.constructor; // ƒ OrdinaryFunction() { console.log("I'm just an average funct
 x.hasOwnProperty('constructor'); // false
 OrdinaryFunction.prototype.hasOwnProperty('constructor'); // true
 Object.getPrototypeOf(x) === OrdinaryFunction.prototype; // true
-
 /*
-OrdinaryFunction is just a plain old function. It’s the use of the keyword new that “hijacks” the OrdinaryFunction and calls it in such a way that an object is created.
+OrdinaryFunction is just a plain old function. It’s the use of the keyword new that “hijacks” the OrdinaryFunction 
+and calls it in such a way that an object is created.
 OrdinaryFunction.prototype has a constructor property on it because:
-
-The [OrdinaryFunction.prototype] object by default gets a public, non-enumerable property called .constructor,
+The OrdinaryFunction.prototype object by default gets a public, non-enumerable property called .constructor,
 and this property is a reference back to the function [OrdinaryFunction in this case] that the object is associated with.
 */
 
 // .constructor is ‘unsafe, unreliable’
 /* 
 if .prototype is set to an empty object after a function is declared (essentially removing its .constructor), 
-when the new keyword later is used to create a new object, calling .constructor on the new object will not point to the initial function as expected. 
+when the new keyword later is used to create a new object, calling .constructor on the new object 
+will not point to the initial function as expected. 
 It will point to the object at the top of the prototype chain, which does have a .constructor on it.
 */
 

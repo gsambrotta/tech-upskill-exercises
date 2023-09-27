@@ -3,11 +3,12 @@
  making it possible to reuse code and combine objects.
 */
 
-
 /*
  PROTOTYPE CHAIN
  Official JS specification notation is [[Prototype]]
+ Different terminology: [[Protytpe]] | __proto__ | prototype
  [[Prototype]] !== prototype
+
  The [[Prototype]] is an internal linkage that an object gets by default when its created, pointing to another object.
  Prototypes are the mechanism by which JavaScript objects inherit features from one another.
  This link between the two objects is hidden. But has a huge impact on how an object behaves.
@@ -50,13 +51,48 @@ console.log(Object.getPrototypeOf(myObj)) // Do you see __proto__?
     and follow the __proto__ link
 */
 
-
 // BEST PRACTICE
 // .hasOwnProperty() vs Object.hasOwn()
 // Before ES22 - to check weather an obj as a property and it owns it.
 myObj.hasOwnProperty("favoriteNumber"); // part of the prototype. hasOwnProperty is included in the [[Prototype]] chain
 // With ES22
 Object.hasOwn(myObj,"favoriteNumber"); // defined as a static utility of Object.prototype
+
+// [[Prototype]] vs prototype
+/* 
+    Object is the Object(..) function; 
+    by default, all functions (which are themselves objects!) 
+    have such a prototype property on them, pointing at an object.
+    Try this:
+*/
+console.log(Object)
+console.log(Object.prototype)
+console.log(Object.__proto__)
+// The `prototype` property on a function doesn't define any linkage that the function itself experiences. 
+// The `prototype` property on a function refers to an object. This object should be linked TO any other object. This other object is created when calling that function with the new keyword.
+// In other words, when I create myObj3 with the new keyword, this myObj3 get an internal prototype, given by Object which is a function which has the `prototype`
+let myObj3 = new Object();
+// the built-in object named Object.prototype is used as the internal [[Prototype]] value for the new object we create and name myObj3.
+// newObj3 has a Object.prototype thanks to the "new Object()"
+
+
+/*
+Modifying the Prototype
+Although it's generally considered bad practice, it is possible to modify JavaScript's built-in prototypes just like any other object. 
+This means developers can customize or override the behavior of built-in methods, and even add new methods to perform useful operations.
+
+Although there's no standard way of changing which object is used as a prototype, you still can modify an object's behavior 
+via its prototype after construction, which is actually a fairly common idiom in JavaScript.
+*/
+String.prototype.alert = function() { alert(this); };
+
+// try:
+// What happen to the newObj?
+let newObj = {
+  hello: "hello"
+}
+
+newObj.__proto__ = null
 
 // Changing [[Prototype]] of an Object
 // Try this
@@ -82,23 +118,6 @@ console.log(theDate.getYear()); // 95
 theDate.getYear = function () {
   console.log("something else!");
 };
-
-// [[Prototype]] vs prototype
-/* 
-    Object is the Object(..) function; 
-    by default, all functions (which are themselves objects!) 
-    have such a prototype property on them, pointing at an object.
-    Try this:
-*/
-console.log(Object)
-console.log(Object.prototype)
-console.log(Object.__proto__)
-// The `prototype` property on a function doesn't define any linkage that the function itself experiences. 
-// The `prototype` property on a function refers to an object. This object should be linked TO any other object. This other object is created when calling that function with the new keyword.
-// In other words, when I create myObj3 with the new keyword, this myObj3 get an internal prototype, given by Object which is a function which has the `prototype`
-let myObj3 = new Object();
-// the built-in object named Object.prototype is used as the internal [[Prototype]] value for the new object we create and name myObj3.
-// newObj3 has a Object.prototype thanks to the "new Object()"
 
 // SUM UP:
 // "Prototpye" is a property of a function. It does not link or show link to anything else. 
