@@ -76,14 +76,58 @@ The prototype chain's behavior is less like inheritance and more like delegation
 Delegation is a programming pattern where an object, when asked to perform a task, can perform the task itself or ask another object (its delegate) to perform the task on its behalf.
 */
 
-/* 
+// Object.create() over new
+// New Keyword => when new keyword is use to link objects, any side effects will happen at the time of the linking
+// Best practice: Use Object.create()
+/*
+  Object.create() creates a new object linked to the object we specified, 
+  which gives us all the power (delegation) of the [[Prototype]] mechanism, 
+  but without any of the unnecessary complication of new functions acting as classes and constructor calls, 
+  confusing .prototype and .constructor references, or any of that extra stuff 
+*/
+function HelloWorld () {};
+var z = new HelloWorld();
+
+Object.getPrototypeOf(z) === HelloWorld.prototype; // true
+function HelloWorld () {};
+
+var b = Object.create(HelloWorld);
+Object.getPrototypeOf(b); // ƒ HelloWorld() {}
+// isPrototypeOf asks does HelloWorld appear anywhere in b's prototype chain?
+HelloWorld.isPrototypeOf(b); // true
+
+// More trasnparent way of working with delegation and prototype in JS
+//LESS TRANSPARENT 
+var smoothie = {
+  cool: function () {
+    console.log("cool!")
+  }
+}
+
+var mySmoothie = Object.create(smoothie);
+mySmoothie.cool(); //cool!
+
+//MORE TRANSPARENT
+var smoothie = {
+  cool: function () {
+    console.log("cool!")
+  }
+}
+
+var mySmoothie = Object.create(smoothie);
+mySmoothie.doCool = function() {
+  this.cool();
+}; 
+mySmoothie.doCool(); //cool!
+
+// Concept to explore: Behaviour delegation 
+/*
 Reference book: You don't know JS - Object and Classes
 In JavaScript, the [[Prototype]] mechanism links objects to other objects. 
 There are no abstract mechanisms like "classes", no matter how much you try to convince yourself otherwise. 
 It's like paddling a canoe upstream: you can do it, but you're choosing to go against the natural current, 
 so it's obviously going to be harder to get where you're going.
 */
-
 
 // https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object-oriented_programming
 // https://medium.com/@amesimmons/you-dont-know-js-my-learnings-from-this-object-prototypes-9a5f63525dde
