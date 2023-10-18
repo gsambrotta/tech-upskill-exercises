@@ -1,31 +1,42 @@
+
+/*
+BEFORE START:
+Answer to these questions:
+
+- what is scope?
+- what is a dynamic value?
+- What is function invokation?
+- What does it mean to declare a function?
+- What is runtime?
+- What is author time or ?
+- What does it mean to bind a value?
+*/
+
 /* 
-JS developers seem to be perpetually frustrated by the dynamic this binding rules!!
+JS developers seem to be perpetually frustrated by the dynamic `this`-binding rules!!
 
-To know where `this` points to, we have to look where the function is running (callsite rather then declarative).
-That means you cannot simply look at function that use `this` (even a method in a class) 
-and know for sure what this will hold.
+To know where `this` points to, we have to look where the function is running (call site rather then declarative site).
+That means you cannot simply look at the function that use `this` and know for sure what is the object `this` point to.
 
-Instead, you have to find each place the function is invoked, and look at how it's invoked (not even where matters). 
-That's the only way to fully answer what `this` will point to.
-In fact, a single function with `this` in it can be invoked at least four different ways, and any of those approaches will end up 
-assigning a different this for that particular function invocation.
+Instead, you have to find each place the function with `this` is invoked(basically in any place where the function run), 
+and look at HOW is invoked. 
+In fact, a single function with `this` can be invoked at least in four different ways, 
+and based on that `this` will point to a different object.
 
 Why do we care so much about `this`??
-If a function does not have `this` anywhere, then we don't care about it at all.
-But if a function has even one `this`, then we cannot say for sure how the function will behave, unless 
-we figured out FOR EACH INVOCATION of the function (basically in any place where the function run), what `this` point to.
-This create a huge confusion is a large codebase, written by several people.
+As we need to check each invokation of the function to understand what `this` really refer to,
+is easy to create huge confusion is a large codebase, written by several people.
 Think about chasing all the istance of a class or functions in a large codebase to figured out how 1 specific function is behaving and why.
 */
 
 /*
-Reference examples:
-It's sort of like the `this` keyword is a placeholder in a template. 
+Reference explanation:
+1_ Think that the `this` keyword is a placeholder in a template. 
 That placeholder's value-replacement doesn't get determined when we write the code; it gets determined while the code is running.
 
-`this` is very much like a parameter to a function, but it's an implicit parameter. 
-Nothing show that `this` is going to be used (like a param), you have to read all the function body.
-the param name is always `this` which is confusing
+2_ `this` is very much like a parameter to a function, but it's an implicit parameter. 
+Nothing show that `this` is going to be used (like a param), you have to read all the function body to understand
+and the param name is always `this`, which is confusing.
 */
 
 /*
@@ -34,7 +45,7 @@ Lexical Scope is a static context for the function. Static because when we write
 A different programming language might offer dynamic scope, where the context for a function's variable references is not determined by author-time decisions 
 but by runtime conditions. More flexible than static context -- though with flexibility often comes complexity.
 
-JS scope is always and only lexical and static. BUT it offer the `this` mechanism with similar flexibility and capabilities to dynamic scope.
+JS scope is always and only lexical and static. BUT it offer the `this` mechanism with is similar flexibility and capabilities to dynamic scope.
 The this mechanism is, effectively, dynamic context (not scope); this-function can be dynamically invoked against different contexts - impossible with closure and lexical scope vars!
 BEST CODE PRACTICE: Don't use this-aware code unless you really can justify it, and you've carefully weighed the costs.
 */
