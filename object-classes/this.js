@@ -1,4 +1,3 @@
-
 /*
 BEFORE START:
 Answer to these questions:
@@ -8,7 +7,7 @@ Answer to these questions:
 - What is function invokation?
 - What does it mean to declare a function?
 - What is runtime?
-- What is author time or ?
+- What is author time or XXX?
 - What does it mean to bind a value?
 */
 
@@ -46,7 +45,7 @@ A different programming language might offer dynamic scope, where the context fo
 but by runtime conditions. More flexible than static context -- though with flexibility often comes complexity.
 
 JS scope is always and only lexical and static. BUT it offer the `this` mechanism with is similar flexibility and capabilities to dynamic scope.
-The this mechanism is, effectively, dynamic context (not scope); this-function can be dynamically invoked against different contexts - impossible with closure and lexical scope vars!
+The `this` mechanism is, effectively, dynamic context (not scope); `this`-function can be dynamically invoked against different contexts - impossible with closure and lexical scope vars!
 BEST CODE PRACTICE: Don't use this-aware code unless you really can justify it, and you've carefully weighed the costs.
 */
 
@@ -55,7 +54,7 @@ var point = {
     x: null,
     y: null,
 
-    init(x,y) {
+    init(x,y) { // what is the context??
         this.x = x;
         this.y = y;
     },
@@ -74,7 +73,7 @@ var point = {
 
 // 1. Implicit Context Invocation
 // most common and normal way: we expect `this` to work like that.
-point.init(3,4); // `point` is implicit context binding. It says to JS: invoke the init(..) function with `this` referencing point.
+point.init(3,4); // `point` is implicit context binding. It says to JS: invoke the init() function with `this` referencing to `point`.
 
 
 // 2. Default Context Invocation
